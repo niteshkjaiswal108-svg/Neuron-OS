@@ -6,8 +6,9 @@ const app = express();
 app.use(bodyParser.json());
 
 // ----------------- CONFIG -----------------
-const ACCESS_TOKEN = 'EAFrcL48ZCgmwBQSol6bZC5pRrlkEKC1PoT9fZA20FddFd4Fm9ZBSRsjxZCLwuI2LJW1Uc2vdCUeLZC7lZAq75717O3gtU9inhUtZCnr1l1WUgvpAjZB2Io5qDbjCJqFxkdJ3cj6SBjZBpN94I7ZBNSYwNmNuB3ZAGvuzN1kn45jm8NCcpj2SDch0NXlR57f9wVIKZA5oLMBYsxSdNw2qevM9JdElZBZBbiva2hqVkP6uYZA3xkievd7HBk5RybFykfwG7KMuq9TNnIOrDppn5D4ZCABPLlGX3';
-const PHONE_NUMBER_ID = '869211912952418';
+// Pull secrets from Render environment variables
+const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
+const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;
 // -----------------------------------------
 
 // 1️⃣ Webhook Verification
@@ -64,7 +65,7 @@ async function sendMessage(to, message) {
     );
     console.log('Message sent to', to);
   } catch(err) {
-    console.error('Error sending message:', err.response.data);
+    console.error('Error sending message:', err.response?.data || err.message);
   }
 }
 
